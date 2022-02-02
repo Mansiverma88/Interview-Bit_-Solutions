@@ -1,0 +1,24 @@
+public class Solution {
+    public int minDistance(String A, String B) {
+        int dp[][]=new int[A.length()+1][B.length()+1];
+        for(int i=0;i<=A.length();i++)
+        {
+            for(int j=0;j<=B.length();j++)
+            {
+                if(i==0) dp[i][j]=j;//"" "ab"
+                else if(j==0) dp[i][j]=i;//"ab" ""
+                else{
+                if(A.charAt(i-1)==B.charAt(j-1))
+                {
+                    dp[i][j]=dp[i-1][j-1];
+                }
+                else
+                {
+                    dp[i][j]=Math.min(dp[i-1][j], Math.min(dp[i][j-1],dp[i-1][j-1]))+1;
+                }
+                }
+            }
+        }
+        return dp[A.length()][B.length()];
+    }
+}
